@@ -111,7 +111,7 @@ export default function Page() {
     <PageRoot className={"bg-blue-400"}>
       <div className={"border-2 border-black max-w-96 w-full flex flex-col"}>
         {conversations.map((value, index) => (
-          <>
+          <div key={index.toString()}>
             {value.isSelfMessage ? (
               <SelfMessage
                 key={index.toString()}
@@ -126,7 +126,7 @@ export default function Page() {
                 timeString={value.timeString}
               />
             )}
-          </>
+          </div>
         ))}
       </div>
       <form
@@ -146,18 +146,10 @@ export default function Page() {
           <button
             type={"button"}
             className={
-              "bg-line-self rounded-2xl mx-2 my-4 py-2 px-1 w-full max-w-32"
+              "bg-line-self rounded-2xl mx-2 my-4 py-2 px-6 w-full max-w-32"
             }
           >
-            自分として追加
-          </button>
-          <button
-            type={"button"}
-            className={
-              "bg-blue-500 text-white rounded-2xl mx-2 my-4 py-2 px-1 w-full max-w-36"
-            }
-          >
-            相手として追加
+            追加
           </button>
         </div>
       </form>
