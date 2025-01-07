@@ -144,7 +144,7 @@ export default function Page() {
         />
         <div className={"flex justify-center"}>
           <button
-            type={"button"}
+            type={"submit"}
             className={
               "bg-line-self rounded-2xl mx-2 my-4 py-2 px-6 w-full max-w-32"
             }
