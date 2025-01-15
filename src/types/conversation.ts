@@ -15,4 +15,8 @@ export default interface Conversation {
    * 自分の場合、既読をつけるかどうか
    */
   isAlreadyRead?: boolean;
+  /**
+   * UUID
+   */
+  uuid: string;
 }

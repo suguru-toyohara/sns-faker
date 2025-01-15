@@ -16,19 +16,22 @@ export default function Page() {
     text: "相手のメッセージはこんな感じです。",
     timeString: "19:29",
     isSelfMessage: false,
+    uuid: crypto.randomUUID(),
   } as Conversation;
   const conv2 = {
     text: "いい感じに書くことができる。長文でも可能だよ。",
     timeString: "19:30",
     isSelfMessage: true,
     isAlreadyRead: true,
+    uuid: crypto.randomUUID(),
   } as Conversation;
   const conv3 = {
     text: "ここは既読にならない。",
     timeString: "19:31",
     isSelfMessage: true,
     isAlreadyRead: false,
-  };
+    uuid: crypto.randomUUID(),
+  } as Conversation;
   const [conversations, setConversations] = useState<Array<Conversation>>([
     conv1,
     conv2,
@@ -54,6 +57,12 @@ export default function Page() {
   const handleChangeEditable = () => {
     setEditable(!editable);
   };
+  const handleDelete = (uuid: string) => {
+    const newConversations = conversations.filter(
+      (value) => value.uuid !== uuid,
+    );
+    setConversations(newConversations);
+  };
   return (
     <PageRoot className={"bg-blue-400"}>
       <div className={"w-full flex justify-end pr-8 my-2"}>
@@ -71,12 +80,14 @@ export default function Page() {
                 key={index.toString()}
                 editable={editable}
                 conversation={value}
+                handleDelete={handleDelete}
               />
             ) : (
               <LineMessageWithDelete
                 key={index.toString()}
                 editable={editable}
                 conversation={value}
+                handleDelete={handleDelete}
               />
             )}
           </div>

@@ -1,13 +1,19 @@
 import { Message, SelfMessage } from "@/Components/LineMessage";
 import type Conversation from "@/types/conversation";
 
-function DeleteButton() {
+function DeleteButton({
+  deleteAction,
+  uuid,
+}: { deleteAction: (uuid: string) => void; uuid: string }) {
   return (
     <button
       type={"button"}
       className={
         "bg-red-600 rounded-2xl shadow shadow-gray-900 text-sm text-white w-8 h-8"
       }
+      onClick={() => {
+        deleteAction(uuid);
+      }}
     >
       ー
     </button>
@@ -17,10 +23,17 @@ function DeleteButton() {
 export function LineMessageWithDeleteSelf({
   editable = false,
   conversation,
-}: { editable?: boolean; conversation: Conversation }) {
+  handleDelete = () => {},
+}: {
+  editable?: boolean;
+  conversation: Conversation;
+  handleDelete?: (uuid: string) => void;
+}) {
   return (
     <div className={"flex gap-4 justify-end items-center"}>
-      {editable && <DeleteButton />}
+      {editable && (
+        <DeleteButton deleteAction={handleDelete} uuid={conversation.uuid} />
+      )}
       <SelfMessage
         text={conversation.text}
         timeString={conversation.timeString}
@@ -33,11 +46,18 @@ export function LineMessageWithDeleteSelf({
 export function LineMessageWithDelete({
   editable = false,
   conversation,
-}: { editable?: boolean; conversation: Conversation }) {
+  handleDelete = () => {},
+}: {
+  editable?: boolean;
+  conversation: Conversation;
+  handleDelete?: (uuid: string) => void;
+}) {
   return (
     <div className={"flex gap-4 justify-start items-center"}>
       <Message text={conversation.text} timeString={conversation.timeString} />
-      {editable && <DeleteButton />}
+      {editable && (
+        <DeleteButton deleteAction={handleDelete} uuid={conversation.uuid} />
+      )}
     </div>
   );
 }
