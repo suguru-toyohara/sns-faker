@@ -6,7 +6,7 @@ export default function PageRoot({
   className,
 }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`flex flex-col items-center py-24 my-16 ${className}`}>
+    <div className={`flex flex-col items-center py-24 mt-16 ${className}`}>
       {children}
     </div>
   );

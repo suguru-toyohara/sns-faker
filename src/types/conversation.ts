@@ -1,4 +1,4 @@
-interface Conversation {
+export default interface Conversation {
   /**
    * 会話内容
    */

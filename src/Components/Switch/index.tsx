@@ -1,11 +1,21 @@
-export default function Switch({ label, id }: { label: string; id: string }) {
+import type React from "react";
+export default function Switch({
+  labelComponent,
+  id,
+  onClickAction = () => {},
+}: {
+  labelComponent: React.ReactNode;
+  id: string;
+  onClickAction?: () => void;
+}) {
   return (
-    <div className={"relative"}>
+    <div className={"relative flex"}>
       <input
         type="checkbox"
         id={id}
         name={id}
         defaultChecked={false}
+        onClick={onClickAction}
         className={"hidden peer"}
       />
       <label
@@ -34,6 +44,8 @@ export default function Switch({ label, id }: { label: string; id: string }) {
           "after:border-black",
           "after:absolute",
           "after:left-0",
+          "after:-translate-y-1/2",
+          "after:top-1/2",
           "after:peer-checked:left-4",
           "after:peer-checked:border-line-self",
           "after:transition-all",
@@ -41,7 +53,7 @@ export default function Switch({ label, id }: { label: string; id: string }) {
           "after:ease-out",
         ].join(" ")}
       >
-        {label}
+        {labelComponent}
       </label>
     </div>
   );
