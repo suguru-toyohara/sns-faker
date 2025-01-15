@@ -1,5 +1,6 @@
 "use client";
 import PageRoot from "@/Components/PageRoot";
+import Switch from "@/Components/Switch";
 import { type FormEvent, useState } from "react";
 
 function FukidashiLeft({ className }: { className?: string }) {
@@ -97,12 +98,14 @@ export default function Page() {
     event.preventDefault();
     const target = event.target as typeof event.target & {
       "conv-text": { value: string };
+      "self-talk": { checked: boolean };
     };
     const convText = target["conv-text"].value;
+    const isSelf = target["self-talk"].checked;
     const newConversation = {
       text: convText,
       timeString: "19:39",
-      isSelfMessage: true,
+      isSelfMessage: isSelf,
       isAlreadyRead: true,
     } as Conversation;
     setConversations([...conversations, newConversation]);
@@ -140,8 +143,9 @@ export default function Page() {
           id={"conv-text"}
           placeholder={"ここに会話内容を記入"}
           rows={6}
-          className={"border border-gray-300 p-2 w-full max-w-72"}
+          className={"border border-gray-300 p-2 w-full max-w-72 mb-12"}
         />
+        <Switch label={"自分の発言にする"} id={"self-talk"} />
         <div className={"flex justify-center"}>
           <button
             type={"submit"}

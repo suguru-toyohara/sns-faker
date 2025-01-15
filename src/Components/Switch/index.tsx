@@ -1,9 +1,15 @@
-export default function Switch({ label }: { label: string }) {
+export default function Switch({ label, id }: { label: string; id: string }) {
   return (
     <div className={"relative"}>
-      <input type="checkbox" id={"check-box"} className={"hidden peer"} />
+      <input
+        type="checkbox"
+        id={id}
+        name={id}
+        defaultChecked={false}
+        className={"hidden peer"}
+      />
       <label
-        htmlFor={"check-box"}
+        htmlFor={id}
         className={[
           "cursor-pointer",
           "ml-12",
